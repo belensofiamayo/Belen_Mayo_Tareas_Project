@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preinforme TP Final - Perfumería BEMA</title>
+    <!-- Vinculamos la hoja de estilos externa situada en la carpeta css -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ENCABEZADO DE LA PÁGINA -->
+    <header class="encabezado">
+        <h1>PREINFORME DE PROYECTO FINAL</h1>
+        <p class="subtitulo">Sistema de Gestión de Usuarios — Perfumería "BEMA"</p>
+        <div class="datos-institucionales">
+            <p><strong>Institución:</strong> Instituto Sagrado Corazón de Almagro</p>
+            <p><strong>Materia:</strong> Informática (4.° Año) | <strong>Profesor:</strong> Alan Acosta</p>
+        </div>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL DEL PREINFORME -->
+    <main class="contenedor">
+
+        <!-- SECCIÓN  FUNCIONAMIENTO GENERAL -->
+        <section class="seccion">
+            <h2> Explicación General del Sistema</h2>
+            <p>
+                El sistema para la perfumería <strong>BEMA</strong> es una aplicación web cliente-servidor desarrollada con 
+                <strong>HTML, CSS, PHP y MySQL (PDO)</strong> que permite gestionar cuentas de usuario de manera segura.
+            </p>
+            
+            <div class="tarjetas-roles">
+                <article class="tarjeta-rol">
+                    <h3>Área Pública</h3>
+                    <p>Permite a los nuevos clientes registrarse desde un formulario. Tras iniciar sesión, acceden a su panel personal con sus datos protegidos.</p>
+                </article>
+                <article class="tarjeta-rol">
+                    <h3>Área Administrativa</h3>
+                    <p>Exclusiva para el rol <code>admin</code>. Permite listar, buscar por filtro, editar datos, archivar cuentas (borrado lógico) y reactivarlas.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- SECCIÓN  BASE DE DATOS -->
+        <section class="seccion">
+            <h2> Estructura de la Base de Datos (bema_perfumeria)</h2>
+            <p>Se creó la base de datos y la tabla <code>usuarios</code> en <strong>phpMyAdmin</strong> con las restricciones obligatorias (`UNIQUE`, `DEFAULT`, `TIMESTAMP`):</p>
+            
+            <p>CREATE DATABASE bema_perfumeria <br> 
+CHARACTER SET utf8mb4  <br> 
+COLLATE utf8mb4_unicode_ci; <br> 
+
+USE bema_perfumeria; <br> 
+
+CREATE TABLE usuarios ( <br> 
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, <br> 
+    nombre VARCHAR(80) NOT NULL, <br> 
+    apellido VARCHAR(80) NOT NULL, <br> 
+    dni VARCHAR(20) NOT NULL UNIQUE, <br> 
+    email VARCHAR(254) NOT NULL UNIQUE, <br> 
+    password_hash VARCHAR(255) NOT NULL, <br> 
+    rol VARCHAR(20) NOT NULL DEFAULT 'usuario', <br> 
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP, <br> 
+    archivado_en TIMESTAMP NULL DEFAULT NULL
+);</p>
+        </section>
+
+        <!-- SECCIÓN  ESTRUCTURA DE ARCHIVOS -->
+        <section class="seccion">
+            <h2> Organización de Archivos en XAMPP</h2>
+            <p>Los archivos están organizados en la carpeta <code>C:\xampp\htdocs\bema_perfumeria\</code>:</p>
+            
+            <table class="tabla-archivos">
+                <thead>
+                    <tr>
+                        <th>Archivo</th>
+                        <th>Función Principal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>conexion.php</code></td>
+                        <td>Conexión segura a MySQL utilizando PDO y manejo de excepciones.</td>
+                    </tr>
+                    <tr>
+                        <td><code>registro.php</code></td>
+                        <td>Formulario público y procesamiento de alta de nuevos clientes.</td>
+                    </tr>
+                    <tr>
+                        <td><code>login.php</code></td>
+                        <td>Autenticación de credenciales e inicio de <code>$_SESSION</code>.</td>
+                    </tr>
+                    <tr>
+                        <td><code>panel.php</code></td>
+                        <td>Panel personal protegido exclusivo para usuarios autenticados.</td>
+                    </tr>
+                    <tr>
+                        <td><code>admin_usuarios.php</code></td>
+                        <td>Panel de administración con listado general y buscador integrado.</td>
+                    </tr>
+                    <tr>
+                        <td><code>editar_usuario.php</code></td>
+                        <td>Formulario y actualización de datos de un usuario existente.</td>
+                    </tr>
+                    <tr>
+                        <td><code>archivar_usuario.php</code></td>
+                        <td>Ejecuta el borrado lógico (marca fecha en <code>archivado_en</code>).</td>
+                    </tr>
+                    <tr>
+                        <td><code>usuarios_archivados.php</code></td>
+                        <td>Listado de cuentas desactivadas con opción a reactivación.</td>
+                    </tr>
+                    <tr>
+                        <td><code>reactivar_usuario.php</code></td>
+                        <td>Restaura cuentas archivadas (vuelve <code>archivado_en</code> a `NULL`).</td>
+                    </tr>
+                    <tr>
+                        <td><code>cerrar_sesion.php</code></td>
+                        <td>Destruye la sesión activa de PHP de forma segura.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECCIÓN  MEDIDAS DE SEGURIDAD -->
+        <section class="seccion">
+            <h2> Medidas de Seguridad Implementadas</h2>
+            <ul class="lista-puntos">
+                <li><strong>Cifrado de Contraseñas:</strong> Almacenamiento mediante <code>password_hash()</code> y verificación al ingresar con <code>password_verify()</code>. Sin texto plano.</li>
+                <li><strong>Consultas Preparadas (PDO):</strong> Uso de <code>prepare()</code> y <code>execute()</code> para anular riesgos de Inyección SQL.</li>
+                <li><strong>Control de Sesión y Rol:</strong> Las páginas privadas comprueban <code>$_SESSION['usuario_id']</code> y el rol en el servidor antes de renderizar HTML.</li>
+                <li><strong>Escapado de Salida:</strong> Filtrado de datos mostrados en pantalla con <code>htmlspecialchars()</code> para prevenir vulnerabilidades XSS.</li>
+                <li><strong>Aislamiento de Privilegios:</strong> El rol de administrador no se puede asignar desde el formulario público.</li>
+            </ul>
+        </section>
+
+        <!-- SECCIÓN  DIFICULTADES Y SOLUCIONES -->
+        <section class="seccion">
+            <h2> Dificultades Encontradas y Soluciones</h2>
+            
+            <article class="caja-dificultad">
+                <h3>Dificultad 1: Error crítico al intentar registrar DNI o Mail duplicado</h3>
+                <p><strong>Solución:</strong> Se capturó la excepción de PDO mediante un bloque <code>try/catch</code> identificando el código de error SQLSTATE <code>'23000'</code>. Esto permite mostrar un mensaje amigable al usuario indicándole el duplicado sin detener la aplicación.</p>
+            </article>
+
+            <article class="caja-dificultad">
+                <h3>Dificultad 2: Protección de accesos directos por URL en páginas privadas</h3>
+                <p><strong>Solución:</strong> En el inicio de cada archivo privado se incorporó una validación que verifica la sesión y el rol. Si la verificación falla, se envía un código HTTP <code>403</code> y se detiene la ejecución del script con <code>exit()</code>.</p>
+            </article>
+        </section>
+
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="pie-pagina">
+        <p>Trabajo Práctico Final Perfumería BEMA 2026</p>
+    </footer>
+
+</body>
+</html>

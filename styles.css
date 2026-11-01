@@ -1,0 +1,178 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* CUERPO PRINCIPAL */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: #0a0a0a; /* Fondo oscuro elegante estilo perfumería */
+    color: #e0e0e0;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ENCABEZADO */
+.encabezado {
+    text-align: center;
+    margin-bottom: 2rem;
+    max-width: 850px;
+    width: 100%;
+}
+
+.encabezado h1 {
+    color: #fcffff; /* Dorado elegante */
+    font-size: 2.2rem;
+    margin-bottom: 0.3rem;
+}
+
+.subtitulo {
+    color: #ee5dca; /* Violeta */
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.datos-institucionales {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #a1a1aa;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.contenedor {
+    max-width: 850px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* SECCIONES Y TARJETAS */
+.seccion {
+    background: #18132a;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    border: 1px solid #fd58d9;
+}
+
+.seccion h2 {
+    color: #ce41b6;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #3b315c;
+    padding-bottom: 0.5rem;
+}
+
+.seccion p {
+    font-size: 0.95rem;
+    color: #cccccc;
+    margin-bottom: 1rem;
+}
+
+/* ROLES EN TARJETAS */
+.tarjetas-roles {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.tarjeta-rol {
+    flex: 1 1 300px;
+    background: #211a3b;
+    padding: 1.2rem;
+    border-radius: 0.5rem;
+    border-left: 4px solid #a855f7;
+}
+
+.tarjeta-rol h3 {
+    color: #ffffff;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* CÓDIGO SQL */
+pre {
+    background: #090712;
+    color: #4ade80; /* Verde terminal */
+    padding: 1.2rem;
+    border-radius: 0.5rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
+    border: 1px solid #292145;
+}
+
+/* TABLAS */
+.tabla-archivos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.tabla-archivos th, 
+.tabla-archivos td {
+    border: 1px solid #3b315c;
+    padding: 0.8rem;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.tabla-archivos th {
+    background-color: #7e22ce;
+    color: #ffffff;
+}
+
+.tabla-archivos td {
+    background-color: #141024;
+}
+
+/* LISTAS */
+.lista-puntos {
+    margin-left: 1.5rem;
+}
+
+.lista-puntos li {
+    font-size: 0.95rem;
+    color: #cccccc;
+    margin-bottom: 0.8rem;
+}
+
+/* CAJAS DE DIFICULTAD */
+.caja-dificultad {
+    background: #211a3b;
+    border: 1px solid #dd51ae;
+    padding: 1.2rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.caja-dificultad h3 {
+    color: #ff00c8;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+
+.pie-pagina {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    font-size: 0.85rem;
+    color: #71717a;
+}
+
+
+code {
+    background-color: #e474b1;
+    color: #e9d5ff;
+    padding: 0.1rem 0.4rem;
+    border-radius: 0.2rem;
+    font-family: monospace;
+    font-size: 0.9em;
+}
